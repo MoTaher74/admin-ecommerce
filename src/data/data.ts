@@ -1,4 +1,5 @@
-import { IProduct } from "../Interfaces/interface";
+
+import { IFormInput, IProduct } from "../Interfaces/interface";
 
 export const ProductList:IProduct[] = [
 
@@ -8,7 +9,7 @@ export const ProductList:IProduct[] = [
         "image": "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1692947383286-714WUJlhbLS._SL1500_.jpg",
         "price": 773,
         "description": "Digital noise cancelling : Industry leading Active Noise Cancellation (ANC) lends a personalized, virtually soundproof experience at any situation\r\nHi-Res Audio : A built-in amplifier integrated in HD Noise Cancelling Processor QN1 realises the best-in-class signal-to-noise ratio and low distortion for portable devices.\r\nDriver Unit : Powerful 40-mm drivers with Liquid Crystal Polymer (LCP) diaphragms make the headphones perfect for handling heavy beats and can reproduce a full range of frequencies up to 40 kHz.\r\nVoice assistant : Alexa enabled (In-built) for voice access to music, information and more. Activate with a simple touch. Frequency response: 4 Hz-40,000 Hz",
-        "color": "silver",
+        "color": "#FF072D",
         "category": "audio",
       },
       {
@@ -130,4 +131,31 @@ export const ProductList:IProduct[] = [
         "color": "Golden",
         "category": "mobile"
       }
+]
+
+export const FormModal:IFormInput[] = [
+  {
+    id:"title",
+    name:"title",
+    label:"Product Title",
+    type:"text",
+  },
+  {
+    id:"description",
+    name:"description",
+    label:"Product Description",
+    type:"text",
+  },
+  {
+    id:"url",
+    name:"url",
+    label:"Product Image URL",
+    type:"text",
+  },
+  {
+    id:"price",
+    name:"price",
+    label:"Product Price",
+    type:"text",
+  },
 ]

@@ -7,3 +7,10 @@ export interface IProduct {
     color?:string;
     category?:string
 }
+
+export interface IFormInput {
+    id:string;
+    name:string;
+    label:string;
+    type:string
+}
