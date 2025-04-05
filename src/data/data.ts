@@ -1,5 +1,5 @@
 
-import { IFormInput, IProduct } from "../Interfaces/interface";
+import { IProduct } from "../Interfaces/interface";
 
 export const ProductList:IProduct[] = [
 
@@ -133,7 +133,7 @@ export const ProductList:IProduct[] = [
       }
 ]
 
-export const FormModal:IFormInput[] = [
+export const FormModal = [
   {
     id:"title",
     name:"title",
@@ -147,15 +147,15 @@ export const FormModal:IFormInput[] = [
     type:"text",
   },
   {
-    id:"url",
-    name:"url",
+    id:"image",
+    name:"image",
     label:"Product Image URL",
     type:"text",
   },
   {
     id:"price",
     name:"price",
-    label:"Product Price",
+    label:"Product price",
     type:"text",
   },
 ]
