@@ -19,7 +19,9 @@ return (
     <h4> {titleSlicer(title)}</h4>
     <p>{textSlice(description)}</p>
     <div className="flex space-x-2">
-        <CircleColor className={`bg-${color}-700`}/>
+        <CircleColor  style={{ background: `${color}` }} color={""}/>
+        <CircleColor  style={{ background: `${color}` }} color={""}/>
+        <CircleColor  style={{ background: `${color}` }} color={""}/>
         
     </div>
     <div className="flex justify-between items-center">

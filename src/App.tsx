@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import ProductCard from "./components/ProductCard"
 import Modal from "./components/UI/Modal"
-import { FormModal, ProductList } from "./data/data"
+import { Colors, FormModal, ProductList } from "./data/data"
 import Buttons from "./components/UI/Buttons"
 import Inputs from "./components/UI/Inputs"
 import { IProduct } from "./Interfaces/interface"
 import { productValidation } from "./Validation"
 import ErrorsMsg from "./components/ErrorsMsg"
+import CircleColor from "./components/UI/CircleColor"
 
 
 
@@ -16,7 +17,8 @@ function App() {
     title:"",
     description:"",
     price:"",
-    image:""
+    image:"",
+    color:[],
   };
   // *** State ** //
   const [isOpen, setIsOpen] = useState(false)
@@ -27,6 +29,8 @@ function App() {
     price:"",
     image:""})
     // console.log(errors);
+    const [tempColor,setTempColor] = useState<string[]>([]);
+    console.log(tempColor)
 // ------- Handler -------- //
   function open() {
     setIsOpen(true)
@@ -90,6 +94,8 @@ const renderformInputs = FormModal.map(input=>
   </div>
 )
 
+const renderProductColors = Colors.map(color=><CircleColor color={color} key={color} onClick={()=>setTempColor((prev)=>[...prev,color])}/>);
+
 
   return (
            <div>
@@ -101,6 +107,12 @@ const renderformInputs = FormModal.map(input=>
             <Modal isOpen={isOpen} title="New Product" close={close}>
               <form className="space-y-3" key={product.id} onSubmit={submitHandler}>
               {renderformInputs}
+              <div className="flex space-x-2 flex-wrap">
+                {tempColor.map((color)=> <span key={color} className="rounded-lg cursor-pointer p-1 mb-2" style={{background:`${color}`}}>{color}</span>)}
+              </div>
+              <div className="flex space-x-2 flex-wrap">
+                {renderProductColors}
+              </div>
               <div className="flex space-x-3">
               <Buttons className="bg-indigo-600 hover:bg-indigo-400" width="w-full" >Submit</Buttons>
               <Buttons className="bg-gray-300 hover:bg-gray-500" width="w-full" onClick={onCancel}>Cancel</Buttons>
