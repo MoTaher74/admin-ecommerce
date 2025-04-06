@@ -43,7 +43,8 @@ const errors:{title:string;image:string;price:string;description:string} = {
     title:"",
     image:"",
     price:"",
-    description:""
+    description:"",
+
 }
 // Validate that the image field contains a valid URL
 const validURL = /^(http?|https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(product.image);
@@ -64,5 +65,8 @@ errors.price = "Price is  valid or required !!";
 if(!product.image.trim()||!validURL){
     errors.image = "URL is Valid or required !!";
 }
+// if(!product.color){
+//     errors.color = ["Product color is required !!"];
+// }
 return {errors}
 }

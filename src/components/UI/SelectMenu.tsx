@@ -1,12 +1,19 @@
 
-import { useState } from 'react'
+
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid'
 // import { CheckIcon } from '@heroicons/react/20/solid'
 import { Categories } from '../../data/data'
- const SelectMenu = ()=> {
-  const [selected, setSelected] = useState(Categories[1])
+import { ICategory } from '../../Interfaces/interface';
+interface IProps {
+    selected:ICategory;
+    setSelected:(category:ICategory)=>void;
+};
+
+ const SelectMenu = ({selected,setSelected}:IProps)=> {
+
   return (
+   
     <Listbox value={selected} onChange={setSelected}>
       <Label className="block mb-2 text-sm font-medium text-indigo-700">Category</Label>
       <div className="relative mt-2">

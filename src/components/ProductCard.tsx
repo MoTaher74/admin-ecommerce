@@ -6,12 +6,19 @@ import { textSlice , titleSlicer } from "./Utliz/Function";
 
 interface IProps{
 product:IProduct;
+setProductToEdit:(product:IProduct)=>void;
+isEditOpen:()=>void;
 
 }
 
-const ProductCard =({product}:IProps)=>{
+const ProductCard =({product,setProductToEdit,isEditOpen}:IProps)=>{
     const {id,title,image,price,description,category,color}=product;
     const renderProductColors = color.map(color=><CircleColor color={color} key={color}/>);
+
+    const onEditProduct =()=>{
+        setProductToEdit(product);
+        isEditOpen();
+    }
 
 return (
 <>
@@ -28,7 +35,7 @@ return (
         <Images imgURL={image} imgAlt={`${category}-${id}`} imgClassName="w-6 h-6 rounded-full cursor-pointer object-center"/>
     </div>
     <div className="flex justify-between items-center space-x-2">
-        <Buttons className="bg-indigo-600 hover:bg-indigo-400" width="w-full" >Edit</Buttons>
+        <Buttons className="bg-indigo-600 hover:bg-indigo-400" width="w-full" onClick={onEditProduct} >Edit</Buttons>
         <Buttons className="bg-red-600 hover:bg-red-400" width="w-full" >Delete</Buttons>
         
     </div>
