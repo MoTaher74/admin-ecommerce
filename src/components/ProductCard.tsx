@@ -10,7 +10,9 @@ product:IProduct;
 }
 
 const ProductCard =({product}:IProps)=>{
-    const {id,title,image,price,description,color,category}=product;
+    const {id,title,image,price,description,category,color}=product;
+    const renderProductColors = color.map(color=><CircleColor color={color} key={color}/>);
+
 return (
 <>
 <div className="border-2 border-slate-950 rounded-lg p-4 m-4 flex flex-col space-y-2">
@@ -19,10 +21,7 @@ return (
     <h4> {titleSlicer(title)}</h4>
     <p>{textSlice(description)}</p>
     <div className="flex space-x-2">
-        <CircleColor  style={{ background: `${color}` }} color={""}/>
-        <CircleColor  style={{ background: `${color}` }} color={""}/>
-        <CircleColor  style={{ background: `${color}` }} color={""}/>
-        
+    <div className="flex space-x-2 flex-wrap">{renderProductColors}</div>
     </div>
     <div className="flex justify-between items-center">
         <span>Price : ${price} </span>

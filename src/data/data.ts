@@ -1,5 +1,6 @@
 
-import { IFormInput, IProduct } from "../Interfaces/interface";
+import uuid from "react-uuid";
+import { ICategory, IFormInput, IProduct } from "../Interfaces/interface";
 
 export const ProductList:IProduct[] = [
 
@@ -176,5 +177,47 @@ export const Colors :string[] = [
   "#794f47",
   "#f7c5bb",
   "#3d2b1f"
+  
+];
+export const Categories:ICategory[] = [
+  {
+    "id": uuid(),
+    "name": "Nike",
+    "imageUrl": "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1692947383286-714WUJlhbLS._SL1500_.jpg",
+  },
+  {
+    "id": uuid(),
+    "name": "Adidas",
+    "imageUrl": "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1692947383286-714WUJlhbLS._SL1500_.jpg",
+
+  },
+
+  {
+    "id": uuid(),
+    "name": "Gaming Headset",
+    "imageUrl": "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1692947383286-714WUJlhbLS._SL1500_.jpg",
+
+  },
+  {
+    "id":uuid(),
+    "name": "Webcam",
+    "imageUrl": "https://example.com/images/1080pwebcam.jpg",
+  },
+  {
+    "id": uuid(),
+    "name": "Laptop Stand",
+    "imageUrl": "https://example.com/images/laptopstand.jpg",
+  },
+  {
+    "id":uuid(),
+    "name": "USB Hub",
+    "imageUrl": "https://example.com/images/usbhub.jpg",
+
+  },
+  {
+    "id":uuid(),
+    "name": "SSD",
+    "imageUrl": "https://example.com/images/portablesdd.jpg",
+  },
   
 ];

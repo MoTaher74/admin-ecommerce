@@ -8,7 +8,8 @@ import { IProduct } from "./Interfaces/interface"
 import { productValidation } from "./Validation"
 import ErrorsMsg from "./components/ErrorsMsg"
 import CircleColor from "./components/UI/CircleColor"
-
+import uuid from "react-uuid"
+import SelectMenu from "./components/UI/SelectMenu"
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     price:"",
     image:"",
     color:[],
+    
   };
   // *** State ** //
   const [isOpen, setIsOpen] = useState(false)
@@ -30,7 +32,8 @@ function App() {
     image:""})
     // console.log(errors);
     const [tempColor,setTempColor] = useState<string[]>([]);
-    console.log(tempColor)
+    const [productNew,setProductNew] = useState<IProduct[]>(ProductList);
+
 // ------- Handler -------- //
   function open() {
     setIsOpen(true)
@@ -53,17 +56,17 @@ setProduct({...product,[name]:value})
 setErrors({...errors,[name]:''})
   }
 
-const onCancel = () =>{
-  // setIsOpen(false);
-  // console.log("cancel!");
-  close()
-  setProduct(defaultProductObject);
+// const onCancel = () =>{
+//   // setIsOpen(false);
+//   // console.log("cancel!");
+//   close()
+
   
-} 
+// } 
 
 function submitHandler(e: FormEvent<HTMLFormElement>): void {
  e.preventDefault();
- console.log(product);
+//  console.log(product);
  setProduct(defaultProductObject);
  const errors = productValidation({
    title: product.title,
@@ -79,12 +82,16 @@ if (!hasErrors) {
   setErrors(errors.errors);
   return ;
 }
-
+setProductNew((prev) => [...prev, { ...product, color: tempColor,id:uuid() }]);
+setProduct(defaultProductObject);
+setTempColor([]);
+close();
 console.log("Product data sent to our server successfully!");
 
 }
   // ------- Render -------- //
-const renderedProducts  = ProductList.map(product =>  <ProductCard key={product.id} product={product}/> )
+const renderedProducts  = productNew.map(product =>  <ProductCard key={product.id} product={product}/> )
+// const renderedProducts  = ProductList.map(product =>  <ProductCard key={product.id} product={product}/> )
 
 const renderformInputs = FormModal.map(input=>
   <div className="flex flex-col " key={input.id}>
@@ -94,7 +101,13 @@ const renderformInputs = FormModal.map(input=>
   </div>
 )
 
-const renderProductColors = Colors.map(color=><CircleColor color={color} key={color} onClick={()=>setTempColor((prev)=>[...prev,color])}/>);
+const renderProductColors = Colors.map(color=><CircleColor color={color} key={color} onClick={()=>{
+  if(tempColor.includes(color)){
+    setTempColor(prev=>prev.filter(itemColor=> itemColor !== color));
+    return
+  }
+  setTempColor((prev)=>[...prev,color])
+}}/>);
 
 
   return (
@@ -107,15 +120,18 @@ const renderProductColors = Colors.map(color=><CircleColor color={color} key={co
             <Modal isOpen={isOpen} title="New Product" close={close}>
               <form className="space-y-3" key={product.id} onSubmit={submitHandler}>
               {renderformInputs}
+              <SelectMenu/>
               <div className="flex space-x-2 flex-wrap">
-                {tempColor.map((color)=> <span key={color} className="rounded-lg cursor-pointer p-1 mb-2" style={{background:`${color}`}}>{color}</span>)}
+                {tempColor.map((color)=> <span key={color}  className="rounded-lg cursor-pointer p-1 mb-2 text-sm text-white" style={{background:`${color}`}} onClick={()=>{
+                  if(tempColor.includes(color)){
+                    setTempColor(prev=>prev.filter(itemColor=> itemColor !== color));}}}>{color}</span>)}
               </div>
               <div className="flex space-x-2 flex-wrap">
                 {renderProductColors}
               </div>
               <div className="flex space-x-3">
               <Buttons className="bg-indigo-600 hover:bg-indigo-400" width="w-full" >Submit</Buttons>
-              <Buttons className="bg-gray-300 hover:bg-gray-500" width="w-full" onClick={onCancel}>Cancel</Buttons>
+              <Buttons className="bg-gray-300 hover:bg-gray-500" width="w-full" onClick={()=>close()}>Cancel</Buttons>
               </div>
               </form>
             </Modal>
@@ -133,3 +149,5 @@ const renderProductColors = Colors.map(color=><CircleColor color={color} key={co
 }
 
 export default App
+
+
